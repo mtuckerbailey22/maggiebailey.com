@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets";
+import laughing from "../assets/maggie-laughing.jpg";
+import { centers } from '../data/iet-centers';
+
+const steps = [
+  { n: 1, title: 'Settle In at Home', body: 'Dim the lights and rest wherever you feel safest. At our appointed time, you lie down comfortably. No screen or camera is needed — your only job is to rest and breathe.' },
+  { n: 2, title: 'The Energy Work', body: 'From wherever I am, I tune in to you and work with Integrated Energy Therapy to release old patterns held in cellular memory and make room for new, beautiful experiences.' },
+  { n: 3, title: 'Integrate', body: 'Afterward, take it slow. Drink water, rest, and notice what shifts over the following days.' },
+];
+const faqs = [
+  { q: 'Do I have to do anything during the session?', a: 'Nothing at all. Lie down in comfortable clothing, cover up with a favorite blanket, and simply rest or nap. Some people fall asleep, others feel warmth or tingling. Both are normal.' },
+  { q: 'How does distance energy work?', a: 'Energy work is understood to not be bound by physical distance. With your permission, I connect with you and do the session remotely, so you can receive from anywhere in the world.' },
+  { q: 'What is Integrated Energy Therapy (IET)?', a: 'IET is a type of energy work that can help connect the mind and body, release old patterns, relax into the real you, and create new experiences.' },
+];
+---
+<Layout title="Maggie Bailey — Distance Energy Healing (IET)">
+  <section class="relative overflow-hidden px-5 py-16 text-center">
+    <div class="pointer-events-none absolute -right-12 -top-12 h-64 w-64 rounded-full bg-primary-fixed/40 blur-3xl"></div>
+    <div class="pointer-events-none absolute -left-16 top-28 h-56 w-56 rounded-full bg-secondary-fixed/40 blur-2xl"></div>
+    <div class="relative mx-auto max-w-2xl">
+      <span class="inline-block rounded-full border border-outline-variant/40 bg-surface-container px-3 py-1.5 text-[11px] text-primary">Remote worldwide · Practicing wherever you are</span>
+      <h1 class="mt-6 text-4xl leading-tight sm:text-6xl">
+        Release what is heavy.<br />
+        <em class="text-secondary">Receive what is yours.</em>
+      </h1>
+      <p class="mx-auto mt-5 max-w-lg text-lg text-on-surface-variant">
+        Gentle distance Integrated Energy Therapy (IET) with Maggie Bailey. Settle your nervous system and realign your energy — from the comfort of your own bed or couch, anywhere in the world.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/book" class="btn btn-primary">Book a distance session</a>
+        <a href="#how-it-works" class="btn btn-secondary">How sessions work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-6">
+    <div class="card text-center">
+      <h2 class="text-2xl">A 10-Second Somatic Reset</h2>
+      <p class="mt-1 text-sm text-on-surface-variant">Take one conscious breath with the pulse below.</p>
+      <div class="relative mx-auto my-6 flex h-28 w-28 items-center justify-center">
+        <div id="breath-ring" class="absolute inset-0 rounded-full bg-primary-fixed transition-all duration-[4000ms] ease-in-out"></div>
+        <div id="breath-core" class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-[11px] font-semibold uppercase tracking-wide text-on-primary transition-transform duration-[4000ms] ease-in-out">
+          <span id="breath-text">Inhale</span>
+        </div>
+      </div>
+      <p id="breath-instruction" class="font-serif text-xl italic text-primary" aria-live="polite">Drawing in a slow, full breath…</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-10" id="how-it-works">
+    <p class="label">The process</p>
+    <h2 class="text-3xl">How distance sessions unfold</h2>
+    <p class="mt-1 text-sm text-on-surface-variant">We connect. You receive.</p>
+    <ol class="mt-6 flex flex-col gap-3">
+      {steps.map((s) => (
+        <li class="card flex items-start gap-4 !p-5">
+          <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-secondary-fixed font-serif text-lg">{s.n}</span>
+          <div>
+            <h3 class="text-xl">{s.title}</h3>
+            <p class="mt-1 text-sm text-on-surface-variant">{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-6" id="centers">
+    <div class="rounded-2xl border border-outline-variant/40 bg-surface-container p-5">
+      <h2 class="text-2xl">Cellular memory centers</h2>
+      <p class="mb-4 mt-1 text-sm text-on-surface-variant">Select a region to see what is released and what is invited in.</p>
+      <div class="mb-4 flex flex-wrap gap-2" id="center-pills" role="tablist">
+        {centers.map((c, i) => (
+          <button type="button" role="tab" aria-selected={i === 0}
+            data-title={c.title} data-clears={c.clears} data-imprints={c.imprints} data-desc={c.desc}
+            class:list={['center-btn rounded-full border px-3.5 py-1 text-xs font-semibold transition',
+              i === 0 ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant/40 bg-surface-low text-on-surface']}>
+            {c.label}
+          </button>
+        ))}
+      </div>
+      <div class="card !p-4">
+        <h3 id="center-title" class="text-xl text-primary">{centers[0].title}</h3>
+        <div class="my-3 grid grid-cols-2 gap-2">
+          <div class="rounded-lg border border-red-900/10 bg-error-container/30 p-3">
+            <p class="text-[10px] font-semibold uppercase text-error">Releases</p>
+            <p id="center-clears" class="text-sm font-medium">{centers[0].clears}</p>
+          </div>
+          <div class="rounded-lg border border-secondary/20 bg-secondary-container/50 p-3">
+            <p class="text-[10px] font-semibold uppercase text-secondary">Invites</p>
+            <p id="center-imprints" class="text-sm font-medium text-secondary">{centers[0].imprints}</p>
+          </div>
+        </div>
+        <p id="center-desc" class="text-sm text-on-surface-variant">{centers[0].desc}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-10">
+    <div class="card flex flex-col items-center gap-6 !p-5 sm:flex-row">
+      <Image src={laughing} alt="Maggie Bailey laughing" width={480} class="aspect-[3/4] w-48 flex-shrink-0 rounded-xl object-cover" />
+      <div>
+        <p class="label">Meet your guide</p>
+        <h2 class="mt-1 text-3xl">Hi, I'm Maggie.</h2>
+        <p class="mt-3 text-on-surface-variant">I'm an artist and IET practitioner who grew up on the water in Arkansas and now lives in Colorado with my family. I hold space for others to release old patterns, relax into the real you, and create new, beautiful experiences.</p>
+        <a href="/about" class="btn btn-secondary mt-5">Read my story</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-10">
+    <p class="label">Quiet understanding</p>
+    <h2 class="mb-4 text-3xl">Frequently asked questions</h2>
+    <div class="flex flex-col gap-2.5">
+      {faqs.map((f) => (
+        <details class="card !p-4">
+          <summary class="cursor-pointer font-semibold">{f.q}</summary>
+          <p class="mt-3 text-sm text-on-surface-variant">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-6">
+    <div class="rounded-2xl border border-outline-variant/40 bg-surface-high p-8 text-center">
+      <h2 class="text-3xl">Your healing is already waiting for you.</h2>
+      <p class="mx-auto mb-6 mt-2 max-w-sm text-on-surface-variant">Give yourself permission to stop holding everything alone. Settle in, exhale, and let us begin.</p>
+      <a href="/book" class="btn btn-primary">Book a session</a>
+      <p class="mt-4 text-xs text-on-surface-variant">Or <a href="/about" class="underline">read Maggie's story</a>.</p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Breathing pulse
+  const ring = document.getElementById('breath-ring')!;
+  const core = document.getElementById('breath-core')!;
+  const label = document.getElementById('breath-text')!;
+  const instruction = document.getElementById('breath-instruction')!;
+  let inhale = true;
+  function cycle() {
+    if (inhale) {
+      ring.style.transform = 'scale(1.4)'; ring.style.opacity = '0.9'; core.style.transform = 'scale(1.15)';
+      label.textContent = 'Inhale'; instruction.textContent = 'Drawing in a slow, full breath…';
+    } else {
+      ring.style.transform = 'scale(0.85)'; ring.style.opacity = '0.4'; core.style.transform = 'scale(0.95)';
+      label.textContent = 'Exhale'; instruction.textContent = 'Releasing tension and heaviness…';
+    }
+    inhale = !inhale;
+  }
+  cycle();
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(cycle, 4000);
+
+  // IET center picker
+  const btns = document.querySelectorAll<HTMLButtonElement>('.center-btn');
+  const active = ['border-primary', 'bg-primary', 'text-on-primary'];
+  const idle = ['border-outline-variant/40', 'bg-surface-low', 'text-on-surface'];
+  btns.forEach((btn) => btn.addEventListener('click', () => {
+    btns.forEach((b) => { b.classList.remove(...active); b.classList.add(...idle); b.setAttribute('aria-selected', 'false'); });
+    btn.classList.remove(...idle); btn.classList.add(...active); btn.setAttribute('aria-selected', 'true');
+    document.getElementById('center-title')!.textContent = btn.dataset.title ?? '';
+    document.getElementById('center-clears')!.textContent = btn.dataset.clears ?? '';
+    document.getElementById('center-imprints')!.textContent = btn.dataset.imprints ?? '';
+    document.getElementById('center-desc')!.textContent = btn.dataset.desc ?? '';
+  }));
+</script>

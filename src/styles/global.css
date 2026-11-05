@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader", serif;
+  --font-sans: "Manrope", sans-serif;
+
+  --color-surface: #fcf9f3;
+  --color-surface-low: #f6f3ed;
+  --color-surface-container: #f0eee8;
+  --color-surface-high: #ebe8e2;
+  --color-surface-highest: #e5e2dc;
+  --color-surface-lowest: #ffffff;
+  --color-on-surface: #1c1c18;
+  --color-on-surface-variant: #41484b;
+  --color-outline: #71787c;
+  --color-outline-variant: #c1c7cb;
+  --color-primary: #003240;
+  --color-primary-container: #1b4958;
+  --color-primary-fixed: #bde9fc;
+  --color-on-primary: #ffffff;
+  --color-secondary: #436653;
+  --color-secondary-container: #c2e9d1;
+  --color-secondary-fixed: #c5ebd4;
+  --color-on-secondary-container: #476a57;
+  --color-tertiary: #4d2100;
+  --color-amber-sun: #c87a4a;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body { @apply bg-surface font-sans text-[15px] leading-6 text-on-surface antialiased; }
+  h1, h2, h3, h4 { @apply font-serif font-normal tracking-tight; }
+}
+
+@layer components {
+  .label { @apply font-sans text-xs font-semibold uppercase tracking-widest text-secondary; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-xs font-semibold uppercase tracking-widest transition; }
+  .btn-primary { @apply bg-primary text-on-primary shadow-lg shadow-primary/20 hover:bg-primary-container; }
+  .btn-secondary { @apply border border-outline-variant/50 bg-surface-high text-primary hover:bg-surface-highest; }
+  .card { @apply rounded-2xl border border-outline-variant/40 bg-surface-lowest p-6 shadow-[0_4px_24px_rgba(0,50,64,0.06)]; }
+}
